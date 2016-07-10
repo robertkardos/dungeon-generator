@@ -1,2 +1,2 @@
-# map-generator
-Procedural map generator on canvas with JavaScript.
+# dungeon-generator
+Parameterizable, procedural dungeon generator with JavaScript.
