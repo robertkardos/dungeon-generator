@@ -1,15 +1,16 @@
 import * as _ from 'underscore';
-import * as glMatrix from 'gl-matrix';
+import { vec2 } from 'gl-matrix';
 
-let canvas = {
-	width  : window.innerWidth  - 20,
-	height : window.innerHeight - 20
-};
+// let canvas = {
+// 	width  : window.innerWidth  - 20,
+// 	height : window.innerHeight - 20
+// };
 let step = 10;
 let util = {
 	timestamp : function () {
 		return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
 	},
+	canvas : document.getElementById('canvas').getContext('2d'),
 	tileTypes : {
 		0 : {                        // wall
 			tile    : 'wall',
@@ -34,7 +35,7 @@ let util = {
 		4 : {                        // waypoints
 			tile    : 'waypoints',
 			isSolid : false,
-			color   : '#FF0000'
+			color   : '#757575'
 		}
 	},
 	degToRad : function (degrees) {
@@ -59,13 +60,13 @@ let util = {
 	turn : function (vector, direction) {
 		switch (direction) {
 			case 'left':
-				glMatrix.vec2.transformMat2(vector, vector, this.rotationMatrix(-90));
+				vec2.transformMat2(vector, vector, this.rotationMatrix(-90));
 				break;
 			case 'right':
-				glMatrix.vec2.transformMat2(vector, vector, this.rotationMatrix(90));
+				vec2.transformMat2(vector, vector, this.rotationMatrix(90));
 				break;
 			case 'back':
-				glMatrix.vec2.transformMat2(vector, vector, this.rotationMatrix(180));
+				vec2.transformMat2(vector, vector, this.rotationMatrix(180));
 				break;
 			default:
 				console.log('invalid switch direction');
