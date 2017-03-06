@@ -33,7 +33,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "start": "webpack",
+    "start": "webpack-dev-server --progress --inline --port 1234",
     "dev": "webpack-dev-server --inline"
   },
   "bugs": {

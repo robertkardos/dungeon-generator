@@ -12,20 +12,20 @@ let util = {
 	},
 	canvas : document.getElementById('canvas').getContext('2d'),
 	tileTypes : {
-		0 : {                        // wall
+		'wall' : {                   // wall
 			tile    : 'wall',
 			isSolid : true,
-			color   : '#41403d'
+			color   : '#fdf6e3'
 		},
-		1 : {                        // road
+		'road' : {                   // road
 			tile    : 'road',
 			isSolid : false,
-			color   : '#FFFFFF'
+			color   : '#2aa198'
 		},
-		2 : {                        // room
+		'room' : {                   // room
 			tile    : 'room',
 			isSolid : false,
-			color   : '#DFEFFF'
+			color   : '#002b36'
 		},
 		3 : {                        // door
 			tile    : 'door',
@@ -71,6 +71,37 @@ let util = {
 			default:
 				console.log('invalid switch direction');
 		}
+	},
+	draw: function (position, map, size, color) {
+		// console.log(map[position[0]][position[1]].value)
+		this.canvas.fillStyle = color || this.tileTypes[map[position[0]][position[1]].type].color;
+
+		this.canvas.beginPath();
+		this.canvas.lineWidth='1';
+		this.canvas.strokeStyle='rgba(60, 60, 60, 0.55)';
+		this.canvas.rect(position[0] * size, position[1] * size, size, size);
+		this.canvas.stroke();
+		this.canvas.fillRect(position[0] * size, position[1] * size, size, size);
+	},
+	write: function (position, map, size, text) {
+		this.canvas.font = '12px Arial';
+		this.canvas.fillStyle = 'black';
+		this.canvas.strokeText(text, position[0] * size, (position[1] + 1) * size);
+	},
+	drawRect: function (room, size) {
+		this.canvas.beginPath();
+		this.canvas.strokeStyle='rgba(60, 60, 60, 0.55)';
+		this.canvas.rect(room.position[0] * size, room.position[1] * size, room.width * size, room.height * size);
+		this.canvas.stroke();
+	},
+	randomColor: function () {
+		let color = '#';
+		let characters = '0123456789abcdef';
+		for (var j = 0; j < 6; j++) {
+			color += (_.sample(characters));
+		}
+
+		return color;
 	}
 };
 
